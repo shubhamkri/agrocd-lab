@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: lab-project
+  namespace: argocd
+spec:
+  description: Project for the ArgoCD practice lab
+  sourceRepos:
+    - "https://github.com/shubhamkri/argocd-lab.git"
+  destinations:
+    - namespace: "myapp-*"
+      server: "https://kubernetes.default.svc"
+  clusterResourceWhitelist:
+    - group: ""
+      kind: Namespace
+  namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  roles:
+    - name: readonly
+      description: Read-only access to lab-project apps
+      policies:
+        - p, proj:lab-project:readonly, applications, get, lab-project/*, allow

@@ -1,0 +1,20 @@
+# Requires the app to expose Prometheus-format metrics on /metrics
+# (add prometheus_flask_exporter to requirements.txt to make this real).
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: myapp
+  namespace: myapp-dev
+  labels:
+    release: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: myapp
+  namespaceSelector:
+    matchNames:
+      - myapp-dev
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 15s

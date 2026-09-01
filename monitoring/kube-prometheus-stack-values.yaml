@@ -1,0 +1,9 @@
+# helm install monitoring prometheus-community/kube-prometheus-stack -n monitoring --create-namespace -f this-file
+grafana:
+  adminPassword: admin
+  service:
+    type: ClusterIP
+prometheus:
+  prometheusSpec:
+    serviceMonitorSelectorNilUsesHelmValues: false
+    podMonitorSelectorNilUsesHelmValues: false

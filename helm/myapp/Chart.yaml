@@ -1,0 +1,6 @@
+apiVersion: v2
+name: myapp
+description: Simple demo app for the ArgoCD lab
+type: application
+version: 0.1.0
+appVersion: "1.0"

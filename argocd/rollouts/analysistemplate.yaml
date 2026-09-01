@@ -1,0 +1,17 @@
+# Simple analysis: checks the app's own /healthz via a web hook style job-metric.
+# In a real setup this queries Prometheus. Kept dependency-free for the lab.
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: success-rate
+  namespace: myapp-staging
+spec:
+  metrics:
+    - name: healthcheck
+      interval: 15s
+      count: 3
+      successCondition: result == "true"
+      provider:
+        web:
+          url: "http://myapp-canary.myapp-staging.svc.cluster.local/healthz"
+          jsonPath: "{$.status}"

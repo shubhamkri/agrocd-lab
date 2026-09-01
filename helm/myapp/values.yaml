@@ -1,0 +1,18 @@
+replicaCount: 2
+image:
+  repository: ghcr.io/shubhamkri/argocd-lab-app
+  tag: latest
+color: blue
+version: v1
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 200m
+    memory: 128Mi
+autoscaling:
+  enabled: false
+  minReplicas: 2
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 70

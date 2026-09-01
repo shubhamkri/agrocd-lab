@@ -1,0 +1,5 @@
+replicaCount: 2
+color: yellow
+version: v1-staging
+autoscaling:
+  enabled: true

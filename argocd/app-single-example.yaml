@@ -1,0 +1,22 @@
+# Reference: this is what ApplicationSet generates for you automatically.
+# Useful to understand the shape of a plain Application object.
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: myapp-dev
+  namespace: argocd
+spec:
+  project: lab-project
+  source:
+    repoURL: https://github.com/shubhamkri/argocd-lab.git
+    targetRevision: main
+    path: k8s/overlays/dev
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: myapp-dev
+  syncPolicy:
+    automated:
+      prune: true      # deletes resources removed from git
+      selfHeal: true    # reverts manual/drifted changes
+    syncOptions:
+      - CreateNamespace=true

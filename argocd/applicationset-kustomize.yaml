@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: myapp-envs
+  namespace: argocd
+spec:
+  goTemplate: true
+  generators:
+    - list:
+        elements:
+          - env: dev
+            namespace: myapp-dev
+          - env: staging
+            namespace: myapp-staging
+  template:
+    metadata:
+      name: "myapp-{{.env}}"
+    spec:
+      project: lab-project
+      source:
+        repoURL: https://github.com/shubhamkri/argocd-lab.git
+        targetRevision: main
+        path: "k8s/overlays/{{.env}}"
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: "{{.namespace}}"
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+        retry:
+          limit: 3
+          backoff:
+            duration: 5s
+            factor: 2
+            maxDuration: 1m
