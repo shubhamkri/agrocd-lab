@@ -2,21 +2,22 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: myapp-dev
 resources:
-  - ../../base
-  - ../../hooks
+- ../../base
+- ../../hooks
 patches:
-  - target:
-      kind: Deployment
-      name: myapp
-    patch: |-
-      - op: replace
-        path: /spec/replicas
-        value: 1
+- patch: |-
+    - op: replace
+      path: /spec/replicas
+      value: 1
+  target:
+    kind: Deployment
+    name: myapp
 configMapGenerator:
-  - name: myapp-config
-    behavior: merge
-    literals:
-      - APP_COLOR=green
+- behavior: merge
+  literals:
+  - APP_COLOR=green
+  name: myapp-config
 images:
-  - name: ghcr.io/shubhamkri/argocd-lab-app
-    newTag: latest
+- name: ghcr.io/shubhamkri/argocd-lab-app
+  newName: ghcr.io/shubhamkri/agrocd-lab-app
+  newTag: sha-2a66bb4
