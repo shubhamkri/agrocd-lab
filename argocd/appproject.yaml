@@ -6,7 +6,7 @@ metadata:
 spec:
   description: Project for the ArgoCD practice lab
   sourceRepos:
-    - "https://github.com/shubhamkri/argocd-lab.git"
+    - "https://github.com/shubhamkri/agrocd-lab.git"
   destinations:
     - namespace: "myapp-*"
       server: "https://kubernetes.default.svc"
