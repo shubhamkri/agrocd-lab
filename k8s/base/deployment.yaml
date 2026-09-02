@@ -14,6 +14,8 @@ spec:
       labels:
         app: myapp
     spec:
+      imagePullSecrets:
+        - name: ghcr-secret
       containers:
         - name: myapp
           image: ghcr.io/shubhamkri/argocd-lab-app:latest
