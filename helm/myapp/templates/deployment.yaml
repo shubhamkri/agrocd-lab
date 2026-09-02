@@ -15,7 +15,8 @@ spec:
       containers:
         - name: myapp
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          ports:
+        Why are there 3 ReplicaSets?
+This is actually ver  ports:
             - containerPort: 8080
           env:
             - name: APP_COLOR

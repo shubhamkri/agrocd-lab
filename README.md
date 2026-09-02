@@ -299,3 +299,6 @@ kind delete cluster --name argocd-lab
 | Blue-Green        | `argocd/rollouts/bluegreen-rollout.yaml` |
 | Monitoring        | `monitoring/` |
 # agrocd-lab
+
+
+just chceking the auro sync in Argo CD 
